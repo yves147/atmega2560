@@ -1,16 +1,18 @@
+#ifndef F_CPU
 #define F_CPU 16000000UL
+#endif
+
+#ifndef __AVR_ATmega2560__
+#define __AVR_ATmega2560__
+#endif
+
 #define _DEBUG
 #define UNICODE
 #define _UNICODE
 
-#define __AVR_ATmega2560__
-
+#include <stdint.h>
 #include <avr/io.h>
 #include <util/delay.h>
-
-#ifndef uint8_t
-typedef unsigned char uint8_t;
-#endif
 
 #pragma region ERBT
 // Easy Registry Binary Toolchain
@@ -114,7 +116,7 @@ int main(void)
 	while (1)
 	{
 		erbt_SE_HIGH(&PORTB, PORTB7);
-		_delay_ms(2000);
+		_delay_ms(300);
 		erbt_SE_LOW(&PORTB, PORTB7);
 		_delay_ms(5000);
 	}
