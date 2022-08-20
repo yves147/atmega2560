@@ -12,27 +12,11 @@
 typedef unsigned char uint8_t;
 #endif
 
-#define ert_d_base 2
-
 #pragma region ERBT
 // Easy Registry Binary Toolchain
 
-uint8_t erbt_POW_U8_T(uint8_t x)
-{
-	uint8_t b = ert_d_base;
-	uint8_t r = 1;
-	for (;;)
-	{
-		if (x & 1)
-			r *= b;
-		x >>= 1;
-		if (!x)
-			break;
-		b *= b;
-	}
-
-	return r;
-}
+#define ert_d_base 2
+#define erbt_POW_U8_T _BV
 
 // Manual High
 void erbt_M_HIGH(volatile uint8_t *registry, uint8_t comp)
@@ -125,13 +109,13 @@ uint8_t erbt_EC_XROW(uint8_t bs, uint8_t be)
 
 int main(void)
 {
-	erbt_M_HIGH(&DDRB, erbt_EC_4(DD3, DD0, DD7, DD5));
+	erbt_SE_HIGH(&DDRB, PORTB7);
 
 	while (1)
 	{
-		erbt_SE_HIGH(&PORTB, DDB7);
+		erbt_SE_HIGH(&PORTB, PORTB7);
+		_delay_ms(2000);
+		erbt_SE_LOW(&PORTB, PORTB7);
 		_delay_ms(5000);
-		erbt_SE_LOW(&PORTB, DDB7);
-		_delay_ms(10000);
 	}
 }
