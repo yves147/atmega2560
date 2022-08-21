@@ -1,0 +1,3 @@
+[submodule "avr_debug"]
+	path = avr_debug
+	url = https://github.com/jdolinay/avr_debug
