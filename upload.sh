@@ -10,7 +10,7 @@ avrdisassembler_path="/home/yves/Downloads/AVRDisassembler"
 
 programn=$1;
 
-${arduino_install_path}/hardware/tools/avr/bin/avr-gcc -Os -DF_APU=16000000UL -mmcu=atmega2560 -c -o tmp/${programn}.o -I${running_path}/avr_debug/avr8-stub -I${running_path}/sevseg ${programn}.c
+${arduino_install_path}/hardware/tools/avr/bin/avr-gcc -Os -DF_APU=16000000UL -mmcu=atmega2560 -c -o tmp/${programn}.o -I${running_path}/avr_debug/avr8-stub -I${running_path}/sevseg -I${running_path} -I${arduino_install_path}/hardware/arduino/avr/libraries -I${arduino_install_path}/hardware/arduino/avr/libraries/Wire/src -I${arduino_install_path}/hardware/arduino/avr/cores/arduino/ ${programn}.c
 ${arduino_install_path}/hardware/tools/avr/bin/avr-gcc -mmcu=atmega2560 tmp/${programn}.o -o tmp/${programn}.bin
 ${arduino_install_path}/hardware/tools/avr/bin/avr-objcopy -O ihex -R .eeprom tmp/${programn}.bin tmp/${programn}.hex
 
